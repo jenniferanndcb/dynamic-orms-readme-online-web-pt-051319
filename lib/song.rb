@@ -36,7 +36,7 @@ class Song
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
     DB[:conn].execute(sql)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
-    binding.pry
+    
   end
 
   def table_name_for_insert
@@ -53,6 +53,7 @@ class Song
 
   def col_names_for_insert
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
+    binding.pry
   end
 
   def self.find_by_name(name)
